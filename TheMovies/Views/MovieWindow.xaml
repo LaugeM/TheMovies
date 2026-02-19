@@ -1,0 +1,147 @@
+<Window
+    x:Class="TheMovies.Views.MovieWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Films"
+    Width="900"
+    Height="520">
+    <Grid Margin="8">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300" MinWidth="220" />
+            <ColumnDefinition Width="6" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!--  Left: toolbar + list of films  -->
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <ToolBar
+                Grid.Row="0"
+                Padding="0"
+                HorizontalAlignment="Left">
+                <Button
+                    Width="72"
+                    Command="{Binding NewFilmCommand}"
+                    Content="New" />
+                <Button
+                    Width="80"
+                    Margin="6,0,0,0"
+                    Command="{Binding DeleteFilmCommand}"
+                    CommandParameter="{Binding SelectedFilm}"
+                    Content="Delete" />
+            </ToolBar>
+
+            <ListBox
+                x:Name="FilmListBox"
+                Grid.Row="1"
+                Margin="0,8,0,0"
+                ItemsSource="{Binding Films}"
+                SelectedItem="{Binding SelectedFilm, Mode=TwoWay}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="4" Orientation="Horizontal">
+                            <TextBlock Width="40" Text="{Binding FilmID}" />
+                            <TextBlock
+                                Width="220"
+                                Margin="8,0,0,0"
+                                Text="{Binding Title}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+
+        <GridSplitter
+            Grid.Column="1"
+            Width="6"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch" />
+
+        <!--  Right: film editor  -->
+        <Border
+            Grid.Column="2"
+            Padding="12"
+            BorderBrush="LightGray"
+            BorderThickness="1"
+            CornerRadius="4">
+            <StackPanel MaxWidth="520">
+                <TextBlock
+                    Margin="0,0,0,8"
+                    FontWeight="Bold"
+                    Text="Film editor" />
+
+                <!--  FilmID  -->
+                <StackPanel Margin="0,6" Orientation="Horizontal">
+                    <TextBlock Width="120" VerticalAlignment="Center">Film ID</TextBlock>
+                    <TextBox Width="120" Text="{Binding SelectedFilm.FilmID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+
+                <!--  Title  -->
+                <StackPanel Margin="0,6" Orientation="Horizontal">
+                    <TextBlock Width="120" VerticalAlignment="Center">Title</TextBlock>
+                    <TextBox
+                        Width="320"
+                        MaxLength="256"
+                        Text="{Binding SelectedFilm.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+
+                <!--  Genre  -->
+                <StackPanel Margin="0,6" Orientation="Horizontal">
+                    <TextBlock Width="120" VerticalAlignment="Center">Genre</TextBlock>
+                    <TextBox
+                        Width="320"
+                        MaxLength="256"
+                        Text="{Binding SelectedFilm.Genre, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+
+                <!--  FilmDuration  -->
+                <StackPanel Margin="0,6" Orientation="Horizontal">
+                    <TextBlock Width="120" VerticalAlignment="Center">Duration (hh:mm:ss)</TextBlock>
+                    <TextBox
+                        Width="140"
+                        Text="{Binding SelectedFilm.FilmDurationString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        ToolTip="Enter duration as hh:mm:ss" />
+                </StackPanel>
+
+                <!--  Director  -->
+                <StackPanel Margin="0,6" Orientation="Horizontal">
+                    <TextBlock Width="120" VerticalAlignment="Center">Director</TextBlock>
+                    <TextBox
+                        Width="320"
+                        MaxLength="256"
+                        Text="{Binding SelectedFilm.Director, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+
+                <!--  PremiereDate  -->
+                <StackPanel Margin="0,6" Orientation="Horizontal">
+                    <TextBlock Width="120" VerticalAlignment="Center">Premiere Date</TextBlock>
+                    <DatePicker Width="160" SelectedDate="{Binding SelectedFilm.PremiereDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+
+                <StackPanel
+                    Margin="0,12,0,0"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+                    <Button
+                        Width="90"
+                        Command="{Binding SaveFilmCommand}"
+                        Content="Save" />
+                    <Button
+                        Width="90"
+                        Margin="8,0,0,0"
+                        Command="{Binding CancelEditCommand}"
+                        Content="Cancel" />
+                </StackPanel>
+
+                <TextBlock
+                    Margin="0,8,0,0"
+                    Foreground="Gray"
+                    Text="Select a film on the left to edit, or click New to create a new film." />
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
