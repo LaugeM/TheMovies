@@ -17,7 +17,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Click="RegExpense_Button_Click"
-            Content="Udgifter" />
+            Content="Movies" />
         <Button
             x:Name="RegIncome_Button"
             Width="160"

@@ -74,13 +74,7 @@
                     FontWeight="Bold"
                     Text="Film editor" />
 
-                <!--  FilmID  -->
-                <StackPanel Margin="0,6" Orientation="Horizontal">
-                    <TextBlock Width="120" VerticalAlignment="Center">Film ID</TextBlock>
-                    <TextBox Width="120" Text="{Binding SelectedFilm.FilmID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                </StackPanel>
-
-                <!--  Title  -->
+                <!--  Title (NVARCHAR(256))  -->
                 <StackPanel Margin="0,6" Orientation="Horizontal">
                     <TextBlock Width="120" VerticalAlignment="Center">Title</TextBlock>
                     <TextBox
@@ -89,7 +83,7 @@
                         Text="{Binding SelectedFilm.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
 
-                <!--  Genre  -->
+                <!--  Genre (NVARCHAR(256))  -->
                 <StackPanel Margin="0,6" Orientation="Horizontal">
                     <TextBlock Width="120" VerticalAlignment="Center">Genre</TextBlock>
                     <TextBox
@@ -98,16 +92,17 @@
                         Text="{Binding SelectedFilm.Genre, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
 
-                <!--  FilmDuration  -->
+                <!--  FilmDuration (TIME) - expect hh:mm:ss  -->
                 <StackPanel Margin="0,6" Orientation="Horizontal">
                     <TextBlock Width="120" VerticalAlignment="Center">Duration (hh:mm:ss)</TextBlock>
                     <TextBox
                         Width="140"
+                        MaxLength="8"
                         Text="{Binding SelectedFilm.FilmDurationString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        ToolTip="Enter duration as hh:mm:ss" />
+                        ToolTip="Enter duration as hh:mm:ss (maps to SQL TIME)." />
                 </StackPanel>
 
-                <!--  Director  -->
+                <!--  Director (NVARCHAR(256))  -->
                 <StackPanel Margin="0,6" Orientation="Horizontal">
                     <TextBlock Width="120" VerticalAlignment="Center">Director</TextBlock>
                     <TextBox
@@ -116,10 +111,13 @@
                         Text="{Binding SelectedFilm.Director, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
 
-                <!--  PremiereDate  -->
+                <!--  PremiereDate (DATE)  -->
                 <StackPanel Margin="0,6" Orientation="Horizontal">
                     <TextBlock Width="120" VerticalAlignment="Center">Premiere Date</TextBlock>
-                    <DatePicker Width="160" SelectedDate="{Binding SelectedFilm.PremiereDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <DatePicker
+                        Width="160"
+                        SelectedDate="{Binding SelectedFilm.PremiereDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        ToolTip="Date only (maps to SQL DATE)." />
                 </StackPanel>
 
                 <StackPanel
